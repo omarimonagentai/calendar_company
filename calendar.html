@@ -22,7 +22,7 @@ h1{font-size:24px;margin:0;letter-spacing:-.03em} .subtitle{margin:3px 0 0;color
 .panel{max-width:1500px;margin:18px auto 0;background:rgba(255,255,255,.96);color:var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;display:grid;gap:12px;transition:max-height .25s ease,opacity .2s ease,transform .2s ease,margin .2s ease,padding .2s ease;overflow:hidden;max-height:520px}
 .filters-collapsed .panel{max-height:0;opacity:0;transform:translateY(-8px);margin-top:0;padding-top:0;padding-bottom:0;border:0;pointer-events:none}.filters-collapsed .hero{padding-bottom:14px}.filters-collapsed .subtitle{display:none}
 .filters{display:grid;grid-template-columns:220px 1fr 180px 170px;gap:12px;align-items:end} .field{display:flex;flex-direction:column;gap:6px} label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}
-.search,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:white;color:var(--ink)}
+.search-wrap{position:relative;width:100%} .search,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:white;color:var(--ink)} .search{padding-right:34px} .search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;color:#98a2b3;cursor:pointer;font-size:16px;line-height:1;padding:2px 4px;border-radius:4px;display:none} .search-clear:hover{color:var(--ink);background:#f1f5f9} .search-clear.visible{display:block}
 .year-tabs,.view-tabs,.type-tabs{display:flex;gap:6px;flex-wrap:wrap} .pill{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:8px 12px;cursor:pointer;font-weight:750;font-size:13px} .pill.active{background:var(--brand);border-color:var(--brand);color:#fff}
 .hero-view-tabs{display:flex;gap:6px} .hero-view-tabs .pill{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)} .hero-view-tabs .pill.active{background:#fff;border-color:#fff;color:var(--brand)} .hero-view-tabs .pill:hover:not(.active){background:rgba(255,255,255,.22)}
 .city-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap} .smallbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;cursor:pointer;font-weight:750;font-size:12px;color:var(--ink)}
@@ -44,7 +44,7 @@ h1{font-size:24px;margin:0;letter-spacing:-.03em} .subtitle{margin:3px 0 0;color
 <div class="panel">
   <div class="filters">
     <div class="field"><label>Year</label><div class="year-tabs"><button class="pill active" data-year="2026" onclick="setYear(2026)">2026</button><button class="pill" data-year="2027" onclick="setYear(2027)">2027</button></div></div>
-    <div class="field"><label>Search holiday / city / country</label><input id="searchBox" class="search" placeholder="e.g. Barcelona, Easter, local…" oninput="render()" /></div>
+    <div class="field"><label>Search holiday / city / country</label><div class="search-wrap"><input id="searchBox" class="search" placeholder="e.g. Barcelona, Easter, local…" oninput="updateClearBtn();render()" /><button class="search-clear" id="searchClear" onclick="clearSearch()" title="Clear search">×</button></div></div>
     <div class="field"><label>Country</label><select id="countryFilter" onchange="renderCities(); render()"><option value="all">All countries</option></select></div>
     <div class="field"><label>Type</label><select id="typeFilter" onchange="render()"><option value="all">All types</option><option value="national">National</option><option value="regional">Regional</option><option value="local">Local</option></select></div>
   </div>
@@ -64,6 +64,8 @@ const flag=cc=>`<img src="https://flagcdn.com/16x12/${String(cc).toLowerCase()}.
 let cityCountry={};
 let lastScrollY = window.scrollY;
 function setFiltersCollapsed(collapsed){document.body.classList.toggle('filters-collapsed', collapsed); const btn=$('filterToggle'); if(btn){btn.setAttribute('aria-expanded', String(!collapsed)); btn.textContent = collapsed ? '▾ Show filters' : '▴ Hide filters';}}
+function updateClearBtn(){const v=$('searchBox').value; $('searchClear').classList.toggle('visible',v.length>0);}
+function clearSearch(){$('searchBox').value='';updateClearBtn();render();$('searchBox').focus();}
 function toggleFilters(){setFiltersCollapsed(!document.body.classList.contains('filters-collapsed'));}
 window.addEventListener('scroll',()=>{const y=window.scrollY; if(y>70 && y>lastScrollY+4) setFiltersCollapsed(true); if(y<20) setFiltersCollapsed(false); lastScrollY=y;},{passive:true});
 function init(){ selectedCities=new Set([...new Set(HOLIDAYS.map(h=>h.city))]); cityCountry=Object.fromEntries(HOLIDAYS.map(h=>[h.city,COUNTRIES[h.country]||'XX'])); Object.entries(COUNTRY_LABELS).forEach(([cc,name])=>{ const o=document.createElement('option'); o.value=cc; o.innerHTML=name; $('countryFilter').appendChild(o); }); renderCities(); render(); }
