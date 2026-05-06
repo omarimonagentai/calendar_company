@@ -146,6 +146,7 @@
       border-radius: 999px; padding: 7px 10px;
       cursor: pointer; font-weight: 750; font-size: 12px; color: var(--ink);
     }
+    .smallbtn.active { background: var(--brand); border-color: var(--brand); color: #fff; }
 
     /* Flat city chip list – no scroll, wraps freely */
     .city-selector { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; padding: 2px; }
@@ -344,8 +345,8 @@
       <div class="field">
         <label>Cities</label>
         <div class="city-toolbar">
-          <button class="smallbtn" onclick="selectAllVisible()">All</button>
-          <button class="smallbtn" onclick="clearCities()">None</button>
+          <button class="smallbtn" id="cityAllBtn" onclick="selectAllVisible()">All</button>
+          <button class="smallbtn" id="cityNoneBtn" onclick="clearCities()">None</button>
           <span class="muted" id="cityCount"></span>
         </div>
         <div class="city-selector" id="citySel"></div>
@@ -502,6 +503,10 @@
     });
 
     $('cityCount').textContent = `${selectedCities.size} selected`;
+
+    const all = visibleCities();
+    $('cityAllBtn').classList.toggle('active',  all.length > 0 && all.every(c => selectedCities.has(c)));
+    $('cityNoneBtn').classList.toggle('active', selectedCities.size === 0);
   }
 
   function selectAllVisible() { visibleCities().forEach(c => selectedCities.add(c)); renderCities(); render(); }
