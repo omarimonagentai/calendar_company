@@ -94,12 +94,26 @@
 
     /* Filters row */
     .filters {
-      display: grid;
-      grid-template-columns: 1fr 180px 170px;
-      gap: 12px; align-items: end;
+      display: flex;
+      gap: 14px; align-items: flex-end; flex-wrap: wrap;
     }
     .field { display: flex; flex-direction: column; gap: 6px; }
     label  { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 800; }
+    .search-field { flex: 0 0 300px; }
+
+    /* Type chips */
+    .type-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+    .type-chip {
+      border: 1px solid var(--line); background: #fff; color: var(--muted);
+      border-radius: 999px; padding: 7px 11px;
+      cursor: pointer; font-weight: 750; font-size: 12px;
+    }
+    .type-chip.active { border-color: transparent; color: #fff; }
+    .type-chip.active.tc-all      { background: var(--brand); }
+    .type-chip.active.tc-national { background: var(--national); }
+    .type-chip.active.tc-regional { background: var(--regional); }
+    .type-chip.active.tc-local    { background: var(--local); }
+    .type-chip:hover:not(.active) { background: #f1f5f9; }
 
     /* Search input with clear button */
     .search-wrap { position: relative; width: 100%; }
@@ -309,7 +323,7 @@
     <!-- Collapsible filter panel -->
     <div class="panel">
       <div class="filters">
-        <div class="field">
+        <div class="field search-field">
           <label>Search holiday / city / country</label>
           <div class="search-wrap">
             <input id="searchBox" class="search" placeholder="e.g. Barcelona, Easter, local…"
@@ -318,26 +332,20 @@
           </div>
         </div>
         <div class="field">
-          <label>Country</label>
-          <select id="countryFilter" onchange="renderCities(); render()">
-            <option value="all">All countries</option>
-          </select>
-        </div>
-        <div class="field">
           <label>Type</label>
-          <select id="typeFilter" onchange="render()">
-            <option value="all">All types</option>
-            <option value="national">National</option>
-            <option value="regional">Regional</option>
-            <option value="local">Local</option>
-          </select>
+          <div class="type-chips">
+            <button class="type-chip tc-all active"      onclick="setType('all')">All</button>
+            <button class="type-chip tc-national"        onclick="setType('national')">National</button>
+            <button class="type-chip tc-regional"        onclick="setType('regional')">Regional</button>
+            <button class="type-chip tc-local"           onclick="setType('local')">Local</button>
+          </div>
         </div>
       </div>
       <div class="field">
         <label>Cities</label>
         <div class="city-toolbar">
-          <button class="smallbtn" onclick="selectAllVisible()">Select visible</button>
-          <button class="smallbtn" onclick="clearCities()">Clear</button>
+          <button class="smallbtn" onclick="selectAllVisible()">All</button>
+          <button class="smallbtn" onclick="clearCities()">None</button>
           <span class="muted" id="cityCount"></span>
         </div>
         <div class="city-selector" id="citySel"></div>
@@ -381,6 +389,7 @@
   // ── State ────────────────────────────────────────────────────────
   let selectedYear   = 2026;
   let currentView    = 'calendar';
+  let selectedType   = 'all';
   let selectedCities = new Set();
   let cityCountry    = {};
   let lastScrollY    = window.scrollY;
@@ -433,24 +442,20 @@
   function init() {
     selectedCities = new Set([...new Set(HOLIDAYS.map(h => h.city))]);
     cityCountry    = Object.fromEntries(HOLIDAYS.map(h => [h.city, COUNTRIES[h.country] || 'XX']));
-
-    Object.entries(COUNTRY_LABELS).forEach(([cc, name]) => {
-      const o = document.createElement('option');
-      o.value = cc;
-      o.innerHTML = name;
-      $('countryFilter').appendChild(o);
-    });
-
     renderCities();
+    render();
+  }
+
+  // ── Type chip selector ────────────────────────────────────────────
+  function setType(t) {
+    selectedType = t;
+    document.querySelectorAll('.type-chip').forEach(b => b.classList.toggle('active', b.classList.contains(`tc-${t}`)));
     render();
   }
 
   // ── City selector ─────────────────────────────────────────────────
   function visibleCities() {
-    const cf = $('countryFilter').value;
-    return [...new Set(
-      HOLIDAYS.filter(h => cf === 'all' || COUNTRIES[h.country] === cf).map(h => h.city)
-    )].sort();
+    return [...new Set(HOLIDAYS.map(h => h.city))].sort();
   }
 
   function renderCities() {
@@ -519,14 +524,11 @@
 
   // ── Data helpers ──────────────────────────────────────────────────
   function filtered() {
-    const q  = $('searchBox').value.trim().toLowerCase();
-    const cf = $('countryFilter').value;
-    const tf = $('typeFilter').value;
+    const q = $('searchBox').value.trim().toLowerCase();
     return HOLIDAYS.filter(h =>
       h.year === selectedYear &&
       selectedCities.has(h.city) &&
-      (cf === 'all' || COUNTRIES[h.country] === cf) &&
-      (tf === 'all' || h.category === tf) &&
+      (selectedType === 'all' || h.category === selectedType) &&
       (!q || [h.city, h.country, h.name_en, h.name_local, h.type, h.notes, h.category]
                .join(' ').toLowerCase().includes(q))
     );
