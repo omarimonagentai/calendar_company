@@ -1,112 +1,726 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cooltra Holiday Calendar 2026–2027</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071d49'/%3E%3Crect x='10' y='14' width='44' height='40' rx='7' fill='white'/%3E%3Crect x='10' y='14' width='44' height='12' rx='7' fill='%230e5aa7'/%3E%3Ccircle cx='22' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='42' cy='20' r='3' fill='%23ffffff'/%3E%3Ctext x='32' y='47' font-family='Arial,sans-serif' font-size='24' font-weight='700' fill='%23071d49' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E" type="image/svg+xml" />
-<style>
-:root {
-  --ink:#102033; --muted:#667085; --line:#e5e7eb; --bg:#f6f8fb; --card:#fff;
-  --brand:#071d49; --brand2:#0e5aa7; --national:#2563eb; --regional:#f97316; --local:#7c3aed;
-  --shadow:0 10px 30px rgba(15,23,42,.08); --radius:18px;
-}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-button,input,select{font:inherit} .app{min-height:100vh}
-.hero{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#071d49,#0e5aa7);color:#fff;padding:18px 28px;box-shadow:0 8px 24px rgba(7,29,73,.25)}
-.hero-top{display:flex;align-items:center;justify-content:space-between;gap:18px;max-width:1500px;margin:auto}
-.brand{display:flex;gap:14px;align-items:center} .logo{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:25px}
-h1{font-size:24px;margin:0;letter-spacing:-.03em} .subtitle{margin:3px 0 0;color:rgba(255,255,255,.72);font-size:13px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end} .btn{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:9px 13px;cursor:pointer;font-weight:700;font-size:13px} .btn:hover{background:rgba(255,255,255,.2)}
-.filter-toggle{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;border-radius:999px;padding:9px 13px;cursor:pointer;font-weight:800;font-size:13px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}.filter-toggle:hover{background:rgba(255,255,255,.24)}
-.panel{max-width:1500px;margin:18px auto 0;background:rgba(255,255,255,.96);color:var(--ink);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;display:grid;gap:12px;transition:max-height .25s ease,opacity .2s ease,transform .2s ease,margin .2s ease,padding .2s ease;overflow:hidden;max-height:520px}
-.filters-collapsed .panel{max-height:0;opacity:0;transform:translateY(-8px);margin-top:0;padding-top:0;padding-bottom:0;border:0;pointer-events:none}.filters-collapsed .hero{padding-bottom:14px}.filters-collapsed .subtitle{display:none}
-.filters{display:grid;grid-template-columns:220px 1fr 180px 170px;gap:12px;align-items:end} .field{display:flex;flex-direction:column;gap:6px} label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800}
-.search-wrap{position:relative;width:100%} .search,select{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:white;color:var(--ink)} .search{padding-right:34px} .search-clear{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;color:#98a2b3;cursor:pointer;font-size:16px;line-height:1;padding:2px 4px;border-radius:4px;display:none} .search-clear:hover{color:var(--ink);background:#f1f5f9} .search-clear.visible{display:block}
-.year-tabs,.view-tabs,.type-tabs{display:flex;gap:6px;flex-wrap:wrap} .pill{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:8px 12px;cursor:pointer;font-weight:750;font-size:13px} .pill.active{background:var(--brand);border-color:var(--brand);color:#fff}
-.hero-view-tabs{display:flex;gap:6px} .hero-view-tabs .pill{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)} .hero-view-tabs .pill.active{background:#fff;border-color:#fff;color:var(--brand)} .hero-view-tabs .pill:hover:not(.active){background:rgba(255,255,255,.22)}
-.city-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap} .smallbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;cursor:pointer;font-weight:750;font-size:12px;color:var(--ink)}
-.city-selector{display:flex;flex-direction:column;gap:8px;max-height:200px;overflow:auto;padding:3px 4px 1px}
-.country-group{display:flex;flex-direction:column;gap:5px}
-.country-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#f8fafc;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:11px;font-weight:800;color:#344054;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap} .country-btn:hover{background:#eef2f7} .country-btn.all{color:#fff;border-color:transparent} .country-btn.some{border-style:dashed} .cc-count{font-size:10px;font-weight:600;opacity:.75} .country-btn.cc-ES.all{background:#dc2626}.country-btn.cc-FR.all{background:#2563eb}.country-btn.cc-PT.all{background:#16a34a}.country-btn.cc-IT.all{background:#ca8a04}.country-btn.cc-NL.all{background:#ea580c}.country-btn.cc-BE.all{background:#7c3aed} .country-btn.cc-ES.some{border-color:#dc2626;color:#dc2626}.country-btn.cc-FR.some{border-color:#2563eb;color:#2563eb}.country-btn.cc-PT.some{border-color:#16a34a;color:#16a34a}.country-btn.cc-IT.some{border-color:#ca8a04;color:#ca8a04}.country-btn.cc-NL.some{border-color:#ea580c;color:#ea580c}.country-btn.cc-BE.some{border-color:#7c3aed;color:#7c3aed}
-.city-chips{display:flex;gap:6px;flex-wrap:wrap;padding-left:6px}
-.city-chip{border:1px solid var(--line);background:white;border-radius:999px;padding:6px 10px;cursor:pointer;font-weight:650;font-size:12px;color:#344054} .city-chip.selected{color:#fff;border-color:transparent} .cc-ES.selected{background:#dc2626}.cc-FR.selected{background:#2563eb}.cc-PT.selected{background:#16a34a}.cc-IT.selected{background:#ca8a04}.cc-NL.selected{background:#ea580c}.cc-BE.selected{background:#7c3aed}
-.stats{max-width:1500px;margin:16px auto 0;padding:0 28px;display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:12px} .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;box-shadow:0 2px 12px rgba(15,23,42,.04)} .stat strong{display:block;font-size:25px;color:var(--brand)} .stat span{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800}
-.nextbar{max-width:1500px;margin:14px auto 0;padding:0 28px} .next-card{background:#fff;border:1px solid #dbeafe;border-left:5px solid var(--brand2);border-radius:16px;padding:12px 14px;box-shadow:0 2px 12px rgba(15,23,42,.04);display:flex;justify-content:space-between;gap:12px;align-items:center} .next-card b{color:var(--brand)}
-.content{max-width:1500px;margin:16px auto;padding:0 28px 28px} .months-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:16px} .month-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,.04)} .month-header{padding:12px 14px;background:#fff;border-bottom:1px solid var(--line);font-weight:850;color:var(--brand);display:flex;justify-content:space-between} .month-count{font-size:12px;color:var(--muted);font-weight:750}
-.day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:10px} .day-name{font-size:10px;text-align:center;color:#98a2b3;font-weight:800;padding-bottom:4px} .day{min-height:38px;border-radius:10px;padding:4px;position:relative;display:flex;flex-direction:column;align-items:center;gap:2px} .day.weekend{background:#fafafa} .day.today .num{background:var(--brand);color:#fff;border-radius:999px;min-width:21px;height:21px;display:grid;place-items:center} .num{font-size:12px;font-weight:800;color:#344054} .day.muted .num{color:#cbd5e1} .day.has{cursor:pointer;background:#f8fafc;outline:1px solid #edf2f7} .dots{display:flex;gap:2px;flex-wrap:wrap;justify-content:center} .dot{width:6px;height:6px;border-radius:2px} .national{background:var(--national)}.regional{background:var(--regional)}.local{background:var(--local)}
-.list{display:grid;gap:16px} .group{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(15,23,42,.04)} .group h2{font-size:15px;margin:0;padding:12px 14px;background:#f8fafc;color:var(--brand);display:flex;gap:8px;align-items:center} table{width:100%;border-collapse:collapse} th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#98a2b3;background:#fff;padding:10px 12px;border-bottom:1px solid var(--line)} td{font-size:13px;padding:10px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top} tr:last-child td{border-bottom:0} tr:hover td{background:#fbfdff} .date{font-weight:850;color:var(--brand);white-space:nowrap} .muted{color:var(--muted)} .badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 8px;color:#fff;font-size:10px;text-transform:uppercase;font-weight:850;letter-spacing:.05em} .badge.national{background:var(--national)} .badge.regional{background:var(--regional)} .badge.local{background:var(--local)}
-.empty{background:#fff;border:1px dashed #cbd5e1;border-radius:16px;padding:50px;text-align:center;color:var(--muted)}
-.tooltip{position:fixed;display:none;z-index:50;max-width:360px;background:#101828;color:white;border-radius:14px;padding:12px 14px;box-shadow:0 20px 50px rgba(0,0,0,.35);pointer-events:none} .tooltip.visible{display:block} .tt-date{font-size:11px;color:#98a2b3;margin-bottom:7px;text-transform:uppercase;font-weight:800;letter-spacing:.06em} .tt-item{padding:7px 0;border-top:1px solid rgba(255,255,255,.1)} .tt-name{font-weight:850} .tt-local{font-size:12px;color:#cbd5e1;font-style:italic;margin-top:2px} .tt-cities{font-size:12px;color:#cbd5e1;margin-top:5px}
-@media(max-width:900px){.hero{position:sticky;padding:14px 16px}.hero-top{align-items:center}.brand{min-width:0}.logo{width:40px;height:40px}.filter-toggle{padding:8px 11px}.hero-view-tabs .pill{padding:7px 9px;font-size:12px}.panel{margin-top:14px}.filters{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr);padding:0 16px}.content,.nextbar{padding-left:16px;padding-right:16px}.months-grid{grid-template-columns:1fr}td,th{font-size:12px;padding:9px 8px}.hide-sm{display:none}}
-@media(max-width:560px){.hero-view-tabs .pill span{display:none}}
-@media print{.hero,.stats,.nextbar{box-shadow:none}.panel{display:none}.content{padding:0}.month-card,.group{break-inside:avoid}body{background:white}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cooltra/felyx FF Holiday Calendar 2026–2027</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23071d49'/%3E%3Crect x='10' y='14' width='44' height='40' rx='7' fill='white'/%3E%3Crect x='10' y='14' width='44' height='12' rx='7' fill='%230e5aa7'/%3E%3Ccircle cx='22' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='42' cy='20' r='3' fill='%23ffffff'/%3E%3Ctext x='32' y='47' font-family='Arial,sans-serif' font-size='24' font-weight='700' fill='%23071d49' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E" type="image/svg+xml" />
+  <style>
+    /* ── Design tokens ─────────────────────────────────────────────── */
+    :root {
+      --ink:    #102033;
+      --muted:  #667085;
+      --line:   #e5e7eb;
+      --bg:     #f6f8fb;
+      --card:   #fff;
+      --brand:  #071d49;
+      --brand2: #0e5aa7;
+      --national: #2563eb;
+      --regional: #f97316;
+      --local:    #7c3aed;
+      --shadow: 0 10px 30px rgba(15,23,42,.08);
+      --radius: 18px;
+    }
+
+    /* ── Reset & base ──────────────────────────────────────────────── */
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: var(--bg); color: var(--ink); }
+    button, input, select { font: inherit; }
+    .app { min-height: 100vh; }
+
+    /* ── Hero / sticky header ──────────────────────────────────────── */
+    .hero {
+      position: sticky; top: 0; z-index: 20;
+      background: linear-gradient(135deg, #071d49, #0e5aa7);
+      color: #fff;
+      padding: 18px 28px;
+      box-shadow: 0 8px 24px rgba(7,29,73,.25);
+    }
+    .hero-top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 18px; max-width: 1500px; margin: auto;
+    }
+
+    /* Brand */
+    .brand { display: flex; gap: 14px; align-items: center; }
+    .logo  { width: 46px; height: 46px; border-radius: 14px; background: rgba(255,255,255,.14); display: grid; place-items: center; font-size: 25px; }
+    h1        { font-size: 24px; margin: 0; letter-spacing: -.03em; }
+    .subtitle { margin: 3px 0 0; color: rgba(255,255,255,.72); font-size: 13px; }
+
+    /* Filter-toggle button */
+    .filter-toggle {
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      border-radius: 999px;
+      padding: 9px 13px;
+      cursor: pointer;
+      font-weight: 800; font-size: 13px;
+      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 7px;
+    }
+    .filter-toggle:hover { background: rgba(255,255,255,.24); }
+
+    /* Year & view tabs in hero */
+    .hero-year-tabs,
+    .hero-view-tabs { display: flex; gap: 6px; }
+    .hero-year-tabs .pill,
+    .hero-view-tabs .pill {
+      border-color: rgba(255,255,255,.3);
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.85);
+    }
+    .hero-year-tabs .pill.active,
+    .hero-view-tabs .pill.active { background: #fff; border-color: #fff; color: var(--brand); }
+    .hero-year-tabs .pill:hover:not(.active),
+    .hero-view-tabs .pill:hover:not(.active) { background: rgba(255,255,255,.22); }
+
+    /* ── Filter panel (collapsible) ────────────────────────────────── */
+    .panel {
+      max-width: 1500px; margin: 18px auto 0;
+      background: rgba(255,255,255,.96); color: var(--ink);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 14px;
+      display: grid; gap: 12px;
+      transition: max-height .25s ease, opacity .2s ease, transform .2s ease, margin .2s ease, padding .2s ease;
+      overflow: hidden; max-height: 520px;
+    }
+    .filters-collapsed .panel {
+      max-height: 0; opacity: 0; transform: translateY(-8px);
+      margin-top: 0; padding-top: 0; padding-bottom: 0; border: 0; pointer-events: none;
+    }
+    .filters-collapsed .hero    { padding-bottom: 14px; }
+    .filters-collapsed .subtitle { display: none; }
+
+    /* Filters row */
+    .filters {
+      display: flex;
+      gap: 14px; align-items: flex-end; flex-wrap: wrap;
+    }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    label  { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 800; }
+    .search-field { flex: 0 0 300px; }
+
+    /* Type chips */
+    .type-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+    .type-chip {
+      border: 1px solid var(--line); background: #fff; color: var(--muted);
+      border-radius: 999px; padding: 7px 11px;
+      cursor: pointer; font-weight: 750; font-size: 12px;
+    }
+    .type-chip.active { border-color: transparent; color: #fff; }
+    .type-chip.active.tc-all      { background: var(--brand); }
+    .type-chip.active.tc-national { background: var(--national); }
+    .type-chip.active.tc-regional { background: var(--regional); }
+    .type-chip.active.tc-local    { background: var(--local); }
+    .type-chip:hover:not(.active) { background: #f1f5f9; }
+
+    /* Search input with clear button */
+    .search-wrap { position: relative; width: 100%; }
+    .search, select {
+      width: 100%; border: 1px solid var(--line); border-radius: 12px;
+      padding: 10px 12px; background: white; color: var(--ink);
+    }
+    .search { padding-right: 34px; }
+    .search-clear {
+      position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      border: none; background: none; color: #98a2b3;
+      cursor: pointer; font-size: 16px; line-height: 1;
+      padding: 2px 4px; border-radius: 4px; display: none;
+    }
+    .search-clear:hover   { color: var(--ink); background: #f1f5f9; }
+    .search-clear.visible { display: block; }
+
+    /* Pill buttons (inside panels) */
+    .pill {
+      border: 1px solid var(--line); background: #fff; color: var(--muted);
+      border-radius: 999px; padding: 8px 12px;
+      cursor: pointer; font-weight: 750; font-size: 13px;
+    }
+    .pill.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+    /* City selector toolbar */
+    .city-toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .smallbtn {
+      border: 1px solid var(--line); background: #fff;
+      border-radius: 999px; padding: 7px 10px;
+      cursor: pointer; font-weight: 750; font-size: 12px; color: var(--ink);
+    }
+    .smallbtn.active { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+    /* Flat city chip list – no scroll, wraps freely */
+    .city-selector { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; padding: 2px; }
+
+    /* Country flag toggle button */
+    .country-flag-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      border: 2px solid var(--line); background: #f8fafc;
+      border-radius: 999px; padding: 4px 9px;
+      cursor: pointer; font-size: 11px; font-weight: 800; color: #667085;
+      margin-left: 4px;
+    }
+    .country-flag-btn:first-child { margin-left: 0; }
+    .country-flag-btn:hover { background: #eef2f7; }
+    .country-flag-btn.all  { color: #fff; border-color: transparent; }
+    .country-flag-btn.some { border-style: dashed; border-width: 2px; }
+
+    /* Per-country colours */
+    .country-flag-btn.cc-ES.all  { background: #dc2626; }
+    .country-flag-btn.cc-FR.all  { background: #2563eb; }
+    .country-flag-btn.cc-PT.all  { background: #16a34a; }
+    .country-flag-btn.cc-IT.all  { background: #ca8a04; }
+    .country-flag-btn.cc-NL.all  { background: #ea580c; }
+    .country-flag-btn.cc-BE.all  { background: #7c3aed; }
+    .country-flag-btn.cc-ES.some { border-color: #dc2626; color: #dc2626; }
+    .country-flag-btn.cc-FR.some { border-color: #2563eb; color: #2563eb; }
+    .country-flag-btn.cc-PT.some { border-color: #16a34a; color: #16a34a; }
+    .country-flag-btn.cc-IT.some { border-color: #ca8a04; color: #ca8a04; }
+    .country-flag-btn.cc-NL.some { border-color: #ea580c; color: #ea580c; }
+    .country-flag-btn.cc-BE.some { border-color: #7c3aed; color: #7c3aed; }
+
+    /* City chips */
+    .city-chip {
+      border: 1px solid var(--line); background: white;
+      border-radius: 999px; padding: 6px 10px;
+      cursor: pointer; font-weight: 650; font-size: 12px; color: #344054;
+    }
+    .city-chip.selected { color: #fff; border-color: transparent; }
+    .cc-ES.selected { background: #dc2626; }
+    .cc-FR.selected { background: #2563eb; }
+    .cc-PT.selected { background: #16a34a; }
+    .cc-IT.selected { background: #ca8a04; }
+    .cc-NL.selected { background: #ea580c; }
+    .cc-BE.selected { background: #7c3aed; }
+
+    /* ── Stats bar ─────────────────────────────────────────────────── */
+    .stats {
+      max-width: 1500px; margin: 16px auto 0; padding: 0 28px;
+      display: grid; grid-template-columns: repeat(5, minmax(120px,1fr)); gap: 12px;
+    }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 13px 14px; box-shadow: 0 2px 12px rgba(15,23,42,.04); }
+    .stat strong { display: block; font-size: 25px; color: var(--brand); }
+    .stat span   { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 800; }
+
+    /* ── Next-holiday bar ──────────────────────────────────────────── */
+    .nextbar { max-width: 1500px; margin: 14px auto 0; padding: 0 28px; }
+    .next-card {
+      background: #fff; border: 1px solid #dbeafe; border-left: 5px solid var(--brand2);
+      border-radius: 16px; padding: 12px 14px; box-shadow: 0 2px 12px rgba(15,23,42,.04);
+      display: flex; justify-content: space-between; gap: 12px; align-items: center;
+    }
+    .next-card b { color: var(--brand); }
+
+    /* ── Main content area ─────────────────────────────────────────── */
+    .content { max-width: 1500px; margin: 16px auto; padding: 0 28px 28px; }
+
+    /* Calendar view */
+    .months-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(285px,1fr)); gap: 16px; }
+    .month-card   { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 2px 12px rgba(15,23,42,.04); }
+    .month-header { padding: 12px 14px; background: #fff; border-bottom: 1px solid var(--line); font-weight: 850; color: var(--brand); display: flex; justify-content: space-between; }
+    .month-count  { font-size: 12px; color: var(--muted); font-weight: 750; }
+    .day-grid     { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; padding: 10px; }
+    .day-name     { font-size: 10px; text-align: center; color: #98a2b3; font-weight: 800; padding-bottom: 4px; }
+    .day          { min-height: 38px; border-radius: 10px; padding: 4px; position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .day.weekend  { background: #fafafa; }
+    .day.today .num { background: var(--brand); color: #fff; border-radius: 999px; min-width: 21px; height: 21px; display: grid; place-items: center; }
+    .num          { font-size: 12px; font-weight: 800; color: #344054; }
+    .day.muted .num { color: #cbd5e1; }
+    .day.has      { cursor: pointer; background: #f8fafc; outline: 1px solid #edf2f7; }
+    .dots         { display: flex; gap: 2px; flex-wrap: wrap; justify-content: center; }
+    .dot          { width: 6px; height: 6px; border-radius: 2px; }
+    .national  { background: var(--national); }
+    .regional  { background: var(--regional); }
+    .local     { background: var(--local); }
+
+    /* List views */
+    .list  { display: grid; gap: 16px; }
+    .group { background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(15,23,42,.04); }
+    .group h2 { font-size: 15px; margin: 0; padding: 12px 14px; background: #f8fafc; color: var(--brand); display: flex; gap: 8px; align-items: center; }
+    table { width: 100%; border-collapse: collapse; }
+    th    { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #98a2b3; background: #fff; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+    td    { font-size: 13px; padding: 10px 12px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
+    tr:hover td { background: #fbfdff; }
+    .date  { font-weight: 850; color: var(--brand); white-space: nowrap; }
+    .muted { color: var(--muted); }
+    .badge { display: inline-flex; align-items: center; border-radius: 999px; padding: 3px 8px; color: #fff; font-size: 10px; text-transform: uppercase; font-weight: 850; letter-spacing: .05em; }
+    .badge.national { background: var(--national); }
+    .badge.regional { background: var(--regional); }
+    .badge.local    { background: var(--local); }
+    .empty { background: #fff; border: 1px dashed #cbd5e1; border-radius: 16px; padding: 50px; text-align: center; color: var(--muted); }
+
+    /* ── Tooltip ───────────────────────────────────────────────────── */
+    .tooltip {
+      position: fixed; display: none; z-index: 50; max-width: 360px;
+      background: #101828; color: white;
+      border-radius: 14px; padding: 12px 14px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35); pointer-events: none;
+    }
+    .tooltip.visible { display: block; }
+    .tt-date   { font-size: 11px; color: #98a2b3; margin-bottom: 7px; text-transform: uppercase; font-weight: 800; letter-spacing: .06em; }
+    .tt-item   { padding: 7px 0; border-top: 1px solid rgba(255,255,255,.1); }
+    .tt-name   { font-weight: 850; }
+    .tt-local  { font-size: 12px; color: #cbd5e1; font-style: italic; margin-top: 2px; }
+    .tt-cities { font-size: 12px; color: #cbd5e1; margin-top: 5px; }
+
+    /* ── Responsive ────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { position: sticky; padding: 14px 16px; }
+      .hero-top { align-items: center; }
+      .brand { min-width: 0; }
+      .logo { width: 40px; height: 40px; }
+      .filter-toggle { padding: 8px 11px; }
+      .hero-view-tabs .pill { padding: 7px 9px; font-size: 12px; }
+      .panel { margin-top: 14px; }
+      .filters { grid-template-columns: 1fr; }
+      .stats  { grid-template-columns: repeat(2, 1fr); padding: 0 16px; }
+      .content, .nextbar { padding-left: 16px; padding-right: 16px; }
+      .months-grid { grid-template-columns: 1fr; }
+      td, th { font-size: 12px; padding: 9px 8px; }
+      .hide-sm { display: none; }
+    }
+    @media (max-width: 560px) {
+      .hero-view-tabs .pill span { display: none; }
+    }
+    @media print {
+      .hero, .stats, .nextbar { box-shadow: none; }
+      .panel { display: none; }
+      .content { padding: 0; }
+      .month-card, .group { break-inside: avoid; }
+      body { background: white; }
+    }
+  </style>
 </head>
-<body><div class="app">
-<header class="hero"><div class="hero-top"><div class="brand"><div class="logo">📅</div><div><h1>Cooltra Holiday Calendar</h1><p class="subtitle">18 cities · 6 countries · 2026–2027 · operational holiday planning</p></div></div><div class="hero-view-tabs"><button class="pill active" data-view="calendar" onclick="setView('calendar')">Calendar</button><button class="pill" data-view="bydate" onclick="setView('bydate')">By date</button><button class="pill" data-view="bycity" onclick="setView('bycity')">By city</button></div><button id="filterToggle" class="filter-toggle" onclick="toggleFilters()" aria-expanded="true">▴ Hide filters</button></div>
-<div class="panel">
-  <div class="filters">
-    <div class="field"><label>Year</label><div class="year-tabs"><button class="pill active" data-year="2026" onclick="setYear(2026)">2026</button><button class="pill" data-year="2027" onclick="setYear(2027)">2027</button></div></div>
-    <div class="field"><label>Search holiday / city / country</label><div class="search-wrap"><input id="searchBox" class="search" placeholder="e.g. Barcelona, Easter, local…" oninput="updateClearBtn();render()" /><button class="search-clear" id="searchClear" onclick="clearSearch()" title="Clear search">×</button></div></div>
-    <div class="field"><label>Country</label><select id="countryFilter" onchange="renderCities(); render()"><option value="all">All countries</option></select></div>
-    <div class="field"><label>Type</label><select id="typeFilter" onchange="render()"><option value="all">All types</option><option value="national">National</option><option value="regional">Regional</option><option value="local">Local</option></select></div>
-  </div>
-  <div class="field"><label>Cities</label><div class="city-toolbar"><button class="smallbtn" onclick="selectAllVisible()">Select visible</button><button class="smallbtn" onclick="clearCities()">Clear</button><span class="muted" id="cityCount"></span></div><div class="city-selector" id="citySel"></div></div>
-</div></header>
-<section class="stats"><div class="stat"><strong id="statTotal">—</strong><span>unique dates</span></div><div class="stat"><strong id="statNational">—</strong><span>national</span></div><div class="stat"><strong id="statRegional">—</strong><span>regional</span></div><div class="stat"><strong id="statLocal">—</strong><span>local</span></div><div class="stat"><strong id="statWeekend">—</strong><span>on weekend</span></div></section>
-<section class="nextbar"><div class="next-card" id="nextHoliday">—</div></section>
-<main class="content"><div id="viewCalendar" class="months-grid"></div><div id="viewByDate" class="list" style="display:none"></div><div id="viewByCity" class="list" style="display:none"></div></main><div class="tooltip" id="tooltip"></div>
+<body>
+<div class="app">
+
+  <!-- ── Sticky header ──────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="hero-top">
+      <div class="brand">
+        <div class="logo">📅</div>
+        <div>
+          <h1>Cooltra Holiday Calendar</h1>
+          <p class="subtitle">18 cities · 6 countries · 2026–2027 · operational holiday planning</p>
+        </div>
+      </div>
+
+      <div class="hero-year-tabs">
+        <button class="pill active" data-year="2026" onclick="setYear(2026)">2026</button>
+        <button class="pill"        data-year="2027" onclick="setYear(2027)">2027</button>
+      </div>
+
+      <div class="hero-view-tabs">
+        <button class="pill active" data-view="calendar" onclick="setView('calendar')">Calendar</button>
+        <button class="pill"        data-view="bydate"   onclick="setView('bydate')">By date</button>
+        <button class="pill"        data-view="bycity"   onclick="setView('bycity')">By city</button>
+      </div>
+
+      <button id="filterToggle" class="filter-toggle" onclick="toggleFilters()" aria-expanded="true">
+        ▴ Hide filters
+      </button>
+    </div>
+
+    <!-- Collapsible filter panel -->
+    <div class="panel">
+      <div class="filters">
+        <div class="field search-field">
+          <label>Search holiday / city / country</label>
+          <div class="search-wrap">
+            <input id="searchBox" class="search" placeholder="e.g. Barcelona, Easter, local…"
+                   oninput="updateClearBtn(); render()" />
+            <button class="search-clear" id="searchClear" onclick="clearSearch()" title="Clear search">×</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Type</label>
+          <div class="type-chips">
+            <button class="type-chip tc-all active"      onclick="setType('all')">All</button>
+            <button class="type-chip tc-national"        onclick="setType('national')">National</button>
+            <button class="type-chip tc-regional"        onclick="setType('regional')">Regional</button>
+            <button class="type-chip tc-local"           onclick="setType('local')">Local</button>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Cities</label>
+        <div class="city-toolbar">
+          <button class="smallbtn" id="cityAllBtn" onclick="selectAllVisible()">All</button>
+          <button class="smallbtn" id="cityNoneBtn" onclick="clearCities()">None</button>
+          <span class="muted" id="cityCount"></span>
+        </div>
+        <div class="city-selector" id="citySel"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Stats bar ──────────────────────────────────────────────────── -->
+  <section class="stats">
+    <div class="stat"><strong id="statTotal">—</strong><span>unique dates</span></div>
+    <div class="stat"><strong id="statNational">—</strong><span>national</span></div>
+    <div class="stat"><strong id="statRegional">—</strong><span>regional</span></div>
+    <div class="stat"><strong id="statLocal">—</strong><span>local</span></div>
+    <div class="stat"><strong id="statWeekend">—</strong><span>on weekend</span></div>
+  </section>
+
+  <!-- ── Next holiday banner ────────────────────────────────────────── -->
+  <section class="nextbar">
+    <div class="next-card" id="nextHoliday">—</div>
+  </section>
+
+  <!-- ── Main views ─────────────────────────────────────────────────── -->
+  <main class="content">
+    <div id="viewCalendar" class="months-grid"></div>
+    <div id="viewByDate"   class="list" style="display:none"></div>
+    <div id="viewByCity"   class="list" style="display:none"></div>
+  </main>
+
+  <div class="tooltip" id="tooltip"></div>
 </div>
+
 <script>
-let HOLIDAYS, COUNTRIES, COUNTRY_LABELS;
-const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']; const DAYSHORT=['Mo','Tu','We','Th','Fr','Sa','Su'];
-let selectedYear=2026,currentView='calendar',selectedCities=new Set();
-const $=id=>document.getElementById(id); const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const flag=cc=>`<img src="https://flagcdn.com/16x12/${String(cc).toLowerCase()}.png" width="16" height="12" style="vertical-align:-1px;border-radius:2px;margin-right:5px" alt="${cc}">`;
-let cityCountry={};
-let lastScrollY = window.scrollY;
-function setFiltersCollapsed(collapsed){document.body.classList.toggle('filters-collapsed', collapsed); const btn=$('filterToggle'); if(btn){btn.setAttribute('aria-expanded', String(!collapsed)); btn.textContent = collapsed ? '▾ Show filters' : '▴ Hide filters';}}
-function updateClearBtn(){const v=$('searchBox').value; $('searchClear').classList.toggle('visible',v.length>0);}
-function clearSearch(){$('searchBox').value='';updateClearBtn();render();$('searchBox').focus();}
-function toggleFilters(){setFiltersCollapsed(!document.body.classList.contains('filters-collapsed'));}
-window.addEventListener('scroll',()=>{const y=window.scrollY; if(y>70 && y>lastScrollY+4) setFiltersCollapsed(true); if(y<20) setFiltersCollapsed(false); lastScrollY=y;},{passive:true});
-function init(){ selectedCities=new Set([...new Set(HOLIDAYS.map(h=>h.city))]); cityCountry=Object.fromEntries(HOLIDAYS.map(h=>[h.city,COUNTRIES[h.country]||'XX'])); Object.entries(COUNTRY_LABELS).forEach(([cc,name])=>{ const o=document.createElement('option'); o.value=cc; o.innerHTML=name; $('countryFilter').appendChild(o); }); renderCities(); render(); }
-function visibleCities(){ const cf=$('countryFilter').value; return [...new Set(HOLIDAYS.filter(h=>cf==='all'||COUNTRIES[h.country]===cf).map(h=>h.city))].sort(); }
-function renderCities(){
-  const box=$('citySel'); box.innerHTML='';
-  const groups={};
-  visibleCities().forEach(city=>{const cc=cityCountry[city];(groups[cc]??=[]).push(city);});
-  Object.entries(groups).forEach(([cc,cities])=>{
-    const sel=cities.filter(c=>selectedCities.has(c)).length;
-    const state=sel===cities.length?'all':sel>0?'some':'';
-    const grp=document.createElement('div'); grp.className='country-group';
-    const btn=document.createElement('button');
-    btn.className=`country-btn cc-${cc} ${state}`;
-    btn.innerHTML=`${flag(cc)}<span>${COUNTRY_LABELS[cc]||cc}</span><span class="cc-count">${sel}/${cities.length}</span>`;
-    btn.onclick=()=>{if(sel===cities.length) cities.forEach(c=>selectedCities.delete(c)); else cities.forEach(c=>selectedCities.add(c)); renderCities(); render();};
-    const chips=document.createElement('div'); chips.className='city-chips';
-    cities.forEach(city=>{const b=document.createElement('button'); b.className=`city-chip cc-${cc} ${selectedCities.has(city)?'selected':''}`; b.textContent=city; b.onclick=()=>{selectedCities.has(city)?selectedCities.delete(city):selectedCities.add(city); renderCities(); render();}; chips.appendChild(b);});
-    grp.appendChild(btn); grp.appendChild(chips); box.appendChild(grp);
-  });
-  $('cityCount').textContent=`${selectedCities.size} selected`;
-}
-function selectAllVisible(){ visibleCities().forEach(c=>selectedCities.add(c)); renderCities(); render(); } function clearCities(){ selectedCities.clear(); renderCities(); render(); }
-function setYear(y){ selectedYear=y; document.querySelectorAll('[data-year]').forEach(b=>b.classList.toggle('active',+b.dataset.year===y)); render(); }
-function setView(v){ currentView=v; document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v)); $('viewCalendar').style.display=v==='calendar'?'grid':'none'; $('viewByDate').style.display=v==='bydate'?'grid':'none'; $('viewByCity').style.display=v==='bycity'?'grid':'none'; render(); }
-function filtered(raw=false){ const q=$('searchBox').value.trim().toLowerCase(), cf=$('countryFilter').value, tf=$('typeFilter').value; return HOLIDAYS.filter(h=>h.year===selectedYear && selectedCities.has(h.city) && (cf==='all'||COUNTRIES[h.country]===cf) && (tf==='all'||h.category===tf) && (!q || [h.city,h.country,h.name_en,h.name_local,h.type,h.notes,h.category].join(' ').toLowerCase().includes(q))); }
-function dedupe(rows){ const m=new Map(); rows.forEach(h=>{ const k=[h.date,h.name_en,h.category].join('|'); if(!m.has(k)) m.set(k,{...h,cities:[]}); if(!m.get(k).cities.includes(h.city)) m.get(k).cities.push(h.city); }); return [...m.values()].sort((a,b)=>a.date.localeCompare(b.date)); }
-function dateObj(s){return new Date(s+'T12:00:00')} function isWeekend(s){const d=dateObj(s).getDay(); return d===0||d===6} function fmt(s){return dateObj(s).toLocaleDateString('en-GB',{weekday:'short',day:'2-digit',month:'short'})}
-function stats(rows,ds){ const dates=new Set(ds.map(h=>h.date)); $('statTotal').textContent=dates.size; $('statNational').textContent=ds.filter(h=>h.category==='national').length; $('statRegional').textContent=ds.filter(h=>h.category==='regional').length; $('statLocal').textContent=ds.filter(h=>h.category==='local').length; $('statWeekend').textContent=[...dates].filter(isWeekend).length; const today=new Date(); const next=ds.find(h=>dateObj(h.date)>=new Date(today.getFullYear(),today.getMonth(),today.getDate())); $('nextHoliday').innerHTML=next?`<div><b>Next selected holiday:</b> ${fmt(next.date)} · ${esc(next.name_en)} <span class="muted">(${esc(next.cities.join(', '))})</span></div><span class="badge ${next.category}">${next.category}</span>`:'<div><b>No upcoming selected holidays</b> for the current filter.</div>'; }
-function render(){ const rows=filtered(); const ds=dedupe(rows); stats(rows,ds); if(currentView==='calendar') calendar(ds); if(currentView==='bydate') listByDate(rows); if(currentView==='bycity') listByCity(rows); }
-function calendar(ds){ const by={}; ds.forEach(h=>(by[h.date]??=[]).push(h)); const grid=$('viewCalendar'); grid.innerHTML=''; for(let m=0;m<12;m++){ const count=Object.keys(by).filter(d=>+d.slice(5,7)===m+1).length; const card=document.createElement('section'); card.className='month-card'; card.innerHTML=`<div class="month-header"><span>${MONTHS[m]} ${selectedYear}</span><span class="month-count">${count||''}</span></div><div class="day-grid"></div>`; const dg=card.querySelector('.day-grid'); DAYSHORT.forEach((d,i)=>dg.insertAdjacentHTML('beforeend',`<div class="day-name">${d}</div>`)); const first=new Date(selectedYear,m,1).getDay(); const off=first===0?6:first-1; for(let i=0;i<off;i++) dg.insertAdjacentHTML('beforeend','<div class="day muted"></div>'); const days=new Date(selectedYear,m+1,0).getDate(); const today=new Date(); for(let d=1;d<=days;d++){ const s=`${selectedYear}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; const hol=by[s]||[]; const el=document.createElement('div'); const dow=new Date(selectedYear,m,d).getDay(); el.className=`day ${dow===0||dow===6?'weekend':''} ${hol.length?'has':''} ${today.getFullYear()===selectedYear&&today.getMonth()===m&&today.getDate()===d?'today':''}`; el.innerHTML=`<div class="num">${d}</div>`+(hol.length?`<div class="dots">${hol.map(h=>`<span class="dot ${h.category}"></span>`).join('')}</div>`:''); if(hol.length){ el.onmouseenter=e=>showTip(e,s,hol); el.onmousemove=moveTip; el.onmouseleave=hideTip; } dg.appendChild(el); } grid.appendChild(card); } }
-function group(rows,keyFn){return rows.reduce((a,h)=>{const k=keyFn(h);(a[k]??=[]).push(h);return a},{})}
-function listByDate(rows){ const c=$('viewByDate'); if(!rows.length) return c.innerHTML='<div class="empty">No holidays match this filter.</div>'; const g=group(rows,h=>h.date.slice(0,7)); c.innerHTML=Object.keys(g).sort().map(k=>table(`${MONTHS[+k.slice(5)-1]} ${k.slice(0,4)}`,g[k].sort((a,b)=>a.date.localeCompare(b.date)||a.city.localeCompare(b.city)),true)).join(''); }
-function listByCity(rows){ const c=$('viewByCity'); if(!rows.length) return c.innerHTML='<div class="empty">No holidays match this filter.</div>'; const g=group(rows,h=>h.city); c.innerHTML=Object.keys(g).sort().map(city=>{const cc=cityCountry[city]; return table(`${flag(cc)}${esc(city)} <span class="muted">(${cc})</span>`,g[city].sort((a,b)=>a.date.localeCompare(b.date)),false)}).join(''); }
-function table(title,rows,showCity){ return `<section class="group"><h2>${title} <span class="muted">${rows.length}</span></h2><table><thead><tr><th>Date</th><th>Day</th>${showCity?'<th>City</th><th class="hide-sm">Country</th>':''}<th>Holiday</th><th class="hide-sm">Local name</th><th>Type</th></tr></thead><tbody>${rows.map(h=>{const d=dateObj(h.date), cc=COUNTRIES[h.country]||''; return `<tr><td class="date">${h.date}${isWeekend(h.date)?' ⚠':''}</td><td class="muted">${DAYS[d.getDay()]}</td>${showCity?`<td>${esc(h.city)}</td><td class="hide-sm">${flag(cc)}${esc(h.country)}</td>`:''}<td>${esc(h.name_en)}${h.notes?`<div class="muted">${esc(h.notes)}</div>`:''}</td><td class="muted hide-sm">${esc(h.name_local)}</td><td><span class="badge ${h.category}">${h.category}</span></td></tr>`}).join('')}</tbody></table></section>`; }
-const tip=$('tooltip'); function showTip(e,date,hols){ tip.innerHTML=`<div class="tt-date">${dateObj(date).toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</div>`+hols.map(h=>`<div class="tt-item"><div class="tt-name">${esc(h.name_en)}</div><div class="tt-local">${esc(h.name_local)}</div><div><span class="badge ${h.category}">${h.category}</span></div><div class="tt-cities">📍 ${esc(h.cities.join(', '))}</div></div>`).join(''); tip.classList.add('visible'); moveTip(e); } function moveTip(e){ const x=e.clientX+14,y=e.clientY+14; tip.style.left=Math.min(x,innerWidth-tip.offsetWidth-12)+'px'; tip.style.top=Math.min(y,innerHeight-tip.offsetHeight-12)+'px'; } function hideTip(){tip.classList.remove('visible')}
-fetch('holidays.json').then(r=>r.json()).then(data=>{HOLIDAYS=data.holidays;COUNTRIES=data.countries;COUNTRY_LABELS=data.countryLabels;init();}).catch(e=>{document.querySelector('.content').innerHTML='<div class="empty">⚠ Error loading holidays.json: '+e.message+'</div>';});
+  // ── Data (loaded from holidays.json) ──────────────────────────────
+  let HOLIDAYS, COUNTRIES, COUNTRY_LABELS;
+
+  // ── Constants ────────────────────────────────────────────────────
+  const MONTHS   = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS     = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const DAYSHORT = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+
+  // ── State ────────────────────────────────────────────────────────
+  let selectedYear   = 2026;
+  let currentView    = 'calendar';
+  let selectedType   = 'all';
+  let selectedCities = new Set();
+  let cityCountry    = {};
+  let lastScrollY    = window.scrollY;
+
+  // ── Utilities ────────────────────────────────────────────────────
+  const $ = id => document.getElementById(id);
+
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]
+  ));
+
+  const flag = cc =>
+    `<img src="https://flagcdn.com/16x12/${String(cc).toLowerCase()}.png"
+          width="16" height="12"
+          style="vertical-align:-1px;border-radius:2px;margin-right:5px"
+          alt="${cc}">`;
+
+  // ── Filter panel collapse ─────────────────────────────────────────
+  function setFiltersCollapsed(collapsed) {
+    document.body.classList.toggle('filters-collapsed', collapsed);
+    const btn = $('filterToggle');
+    if (btn) {
+      btn.setAttribute('aria-expanded', String(!collapsed));
+      btn.textContent = collapsed ? '▾ Show filters' : '▴ Hide filters';
+    }
+  }
+  function toggleFilters() {
+    setFiltersCollapsed(!document.body.classList.contains('filters-collapsed'));
+  }
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y > 70 && y > lastScrollY + 4) setFiltersCollapsed(true);
+    if (y < 20) setFiltersCollapsed(false);
+    lastScrollY = y;
+  }, { passive: true });
+
+  // ── Search clear button ───────────────────────────────────────────
+  function updateClearBtn() {
+    const v = $('searchBox').value;
+    $('searchClear').classList.toggle('visible', v.length > 0);
+  }
+  function clearSearch() {
+    $('searchBox').value = '';
+    updateClearBtn();
+    render();
+    $('searchBox').focus();
+  }
+
+  // ── Initialise after data loads ───────────────────────────────────
+  function init() {
+    selectedCities = new Set([...new Set(HOLIDAYS.map(h => h.city))]);
+    cityCountry    = Object.fromEntries(HOLIDAYS.map(h => [h.city, COUNTRIES[h.country] || 'XX']));
+    renderCities();
+    render();
+  }
+
+  // ── Type chip selector ────────────────────────────────────────────
+  function setType(t) {
+    selectedType = t;
+    document.querySelectorAll('.type-chip').forEach(b => b.classList.toggle('active', b.classList.contains(`tc-${t}`)));
+    render();
+  }
+
+  // ── City selector ─────────────────────────────────────────────────
+  function visibleCities() {
+    return [...new Set(HOLIDAYS.map(h => h.city))].sort();
+  }
+
+  function renderCities() {
+    const box = $('citySel');
+    box.innerHTML = '';
+
+    // Group visible cities by country code
+    const groups = {};
+    visibleCities().forEach(city => {
+      const cc = cityCountry[city];
+      (groups[cc] ??= []).push(city);
+    });
+
+    // Flat sequence: [flag NL] [Amsterdam] [Delft] [flag BE] [Antwerp] …
+    Object.entries(groups).forEach(([cc, cities]) => {
+      const sel   = cities.filter(c => selectedCities.has(c)).length;
+      const state = sel === cities.length ? 'all' : sel > 0 ? 'some' : '';
+
+      // Country flag toggle button
+      const btn = document.createElement('button');
+      btn.className = `country-flag-btn cc-${cc} ${state}`;
+      btn.innerHTML = flag(cc) + `<span>${cc}</span>`;
+      btn.title = `${COUNTRY_LABELS[cc] || cc} — click to toggle all`;
+      btn.onclick = () => {
+        if (sel === cities.length) cities.forEach(c => selectedCities.delete(c));
+        else                       cities.forEach(c => selectedCities.add(c));
+        renderCities();
+        render();
+      };
+      box.appendChild(btn);
+
+      // City chips
+      cities.forEach(city => {
+        const b = document.createElement('button');
+        b.className = `city-chip cc-${cc} ${selectedCities.has(city) ? 'selected' : ''}`;
+        b.textContent = city;
+        b.onclick = () => {
+          selectedCities.has(city) ? selectedCities.delete(city) : selectedCities.add(city);
+          renderCities();
+          render();
+        };
+        box.appendChild(b);
+      });
+    });
+
+    $('cityCount').textContent = `${selectedCities.size} selected`;
+
+    const all = visibleCities();
+    $('cityAllBtn').classList.toggle('active',  all.length > 0 && all.every(c => selectedCities.has(c)));
+    $('cityNoneBtn').classList.toggle('active', selectedCities.size === 0);
+  }
+
+  function selectAllVisible() { visibleCities().forEach(c => selectedCities.add(c)); renderCities(); render(); }
+  function clearCities()       { selectedCities.clear(); renderCities(); render(); }
+
+  // ── Year / view switching ─────────────────────────────────────────
+  function setYear(y) {
+    selectedYear = y;
+    document.querySelectorAll('[data-year]').forEach(b => b.classList.toggle('active', +b.dataset.year === y));
+    render();
+  }
+  function setView(v) {
+    currentView = v;
+    document.querySelectorAll('[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+    $('viewCalendar').style.display = v === 'calendar' ? 'grid' : 'none';
+    $('viewByDate'  ).style.display = v === 'bydate'   ? 'grid' : 'none';
+    $('viewByCity'  ).style.display = v === 'bycity'   ? 'grid' : 'none';
+    render();
+  }
+
+  // ── Data helpers ──────────────────────────────────────────────────
+  function filtered() {
+    const q = $('searchBox').value.trim().toLowerCase();
+    return HOLIDAYS.filter(h =>
+      h.year === selectedYear &&
+      selectedCities.has(h.city) &&
+      (selectedType === 'all' || h.category === selectedType) &&
+      (!q || [h.city, h.country, h.name_en, h.name_local, h.type, h.notes, h.category]
+               .join(' ').toLowerCase().includes(q))
+    );
+  }
+
+  function dedupe(rows) {
+    const m = new Map();
+    rows.forEach(h => {
+      const k = [h.date, h.name_en, h.category].join('|');
+      if (!m.has(k)) m.set(k, { ...h, cities: [] });
+      if (!m.get(k).cities.includes(h.city)) m.get(k).cities.push(h.city);
+    });
+    return [...m.values()].sort((a, b) => a.date.localeCompare(b.date));
+  }
+
+  const dateObj   = s => new Date(s + 'T12:00:00');
+  const isWeekend = s => { const d = dateObj(s).getDay(); return d === 0 || d === 6; };
+  const fmt       = s => dateObj(s).toLocaleDateString('en-GB', { weekday:'short', day:'2-digit', month:'short' });
+
+  // ── Stats bar ─────────────────────────────────────────────────────
+  function stats(rows, ds) {
+    const dates = new Set(ds.map(h => h.date));
+    $('statTotal'   ).textContent = dates.size;
+    $('statNational').textContent = ds.filter(h => h.category === 'national').length;
+    $('statRegional').textContent = ds.filter(h => h.category === 'regional').length;
+    $('statLocal'   ).textContent = ds.filter(h => h.category === 'local').length;
+    $('statWeekend' ).textContent = [...dates].filter(isWeekend).length;
+
+    const today = new Date();
+    const next  = ds.find(h => dateObj(h.date) >= new Date(today.getFullYear(), today.getMonth(), today.getDate()));
+    $('nextHoliday').innerHTML = next
+      ? `<div><b>Next selected holiday:</b> ${fmt(next.date)} · ${esc(next.name_en)}
+           <span class="muted">(${esc(next.cities.join(', '))})</span></div>
+         <span class="badge ${next.category}">${next.category}</span>`
+      : '<div><b>No upcoming selected holidays</b> for the current filter.</div>';
+  }
+
+  // ── Render dispatcher ─────────────────────────────────────────────
+  function render() {
+    const rows = filtered();
+    const ds   = dedupe(rows);
+    stats(rows, ds);
+    if (currentView === 'calendar') calendar(ds);
+    if (currentView === 'bydate')   listByDate(rows);
+    if (currentView === 'bycity')   listByCity(rows);
+  }
+
+  // ── Calendar view ─────────────────────────────────────────────────
+  function calendar(ds) {
+    const by   = {};
+    ds.forEach(h => (by[h.date] ??= []).push(h));
+
+    const grid = $('viewCalendar');
+    grid.innerHTML = '';
+
+    for (let m = 0; m < 12; m++) {
+      const count = Object.keys(by).filter(d => +d.slice(5,7) === m + 1).length;
+      const card  = document.createElement('section');
+      card.className = 'month-card';
+      card.innerHTML = `
+        <div class="month-header">
+          <span>${MONTHS[m]} ${selectedYear}</span>
+          <span class="month-count">${count || ''}</span>
+        </div>
+        <div class="day-grid"></div>`;
+
+      const dg = card.querySelector('.day-grid');
+      DAYSHORT.forEach(d => dg.insertAdjacentHTML('beforeend', `<div class="day-name">${d}</div>`));
+
+      const first = new Date(selectedYear, m, 1).getDay();
+      const off   = first === 0 ? 6 : first - 1;
+      for (let i = 0; i < off; i++) dg.insertAdjacentHTML('beforeend', '<div class="day muted"></div>');
+
+      const days  = new Date(selectedYear, m + 1, 0).getDate();
+      const today = new Date();
+      for (let d = 1; d <= days; d++) {
+        const s   = `${selectedYear}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const hol = by[s] || [];
+        const el  = document.createElement('div');
+        const dow = new Date(selectedYear, m, d).getDay();
+        const isToday = today.getFullYear() === selectedYear && today.getMonth() === m && today.getDate() === d;
+        el.className = `day ${dow === 0 || dow === 6 ? 'weekend' : ''} ${hol.length ? 'has' : ''} ${isToday ? 'today' : ''}`;
+        el.innerHTML = `<div class="num">${d}</div>` +
+          (hol.length ? `<div class="dots">${hol.map(h => `<span class="dot ${h.category}"></span>`).join('')}</div>` : '');
+        if (hol.length) {
+          el.onmouseenter = e => showTip(e, s, hol);
+          el.onmousemove  = moveTip;
+          el.onmouseleave = hideTip;
+        }
+        dg.appendChild(el);
+      }
+      grid.appendChild(card);
+    }
+  }
+
+  // ── List views ────────────────────────────────────────────────────
+  const group = (rows, keyFn) => rows.reduce((a, h) => {
+    const k = keyFn(h);
+    (a[k] ??= []).push(h);
+    return a;
+  }, {});
+
+  function listByDate(rows) {
+    const c = $('viewByDate');
+    if (!rows.length) { c.innerHTML = '<div class="empty">No holidays match this filter.</div>'; return; }
+    const g = group(rows, h => h.date.slice(0, 7));
+    c.innerHTML = Object.keys(g).sort().map(k =>
+      table(`${MONTHS[+k.slice(5) - 1]} ${k.slice(0,4)}`,
+            g[k].sort((a,b) => a.date.localeCompare(b.date) || a.city.localeCompare(b.city)),
+            true)
+    ).join('');
+  }
+
+  function listByCity(rows) {
+    const c = $('viewByCity');
+    if (!rows.length) { c.innerHTML = '<div class="empty">No holidays match this filter.</div>'; return; }
+    const g = group(rows, h => h.city);
+    c.innerHTML = Object.keys(g).sort().map(city => {
+      const cc = cityCountry[city];
+      return table(`${flag(cc)}${esc(city)} <span class="muted">(${cc})</span>`,
+                   g[city].sort((a,b) => a.date.localeCompare(b.date)),
+                   false);
+    }).join('');
+  }
+
+  function table(title, rows, showCity) {
+    const cityCols = showCity ? '<th>City</th><th class="hide-sm">Country</th>' : '';
+    const bodyRows = rows.map(h => {
+      const d  = dateObj(h.date);
+      const cc = COUNTRIES[h.country] || '';
+      const cityCells = showCity
+        ? `<td>${esc(h.city)}</td><td class="hide-sm">${flag(cc)}${esc(h.country)}</td>`
+        : '';
+      return `<tr>
+        <td class="date">${h.date}${isWeekend(h.date) ? ' ⚠' : ''}</td>
+        <td class="muted">${DAYS[d.getDay()]}</td>
+        ${cityCells}
+        <td>${esc(h.name_en)}${h.notes ? `<div class="muted">${esc(h.notes)}</div>` : ''}</td>
+        <td class="muted hide-sm">${esc(h.name_local)}</td>
+        <td><span class="badge ${h.category}">${h.category}</span></td>
+      </tr>`;
+    }).join('');
+    return `
+      <section class="group">
+        <h2>${title} <span class="muted">${rows.length}</span></h2>
+        <table>
+          <thead><tr><th>Date</th><th>Day</th>${cityCols}<th>Holiday</th><th class="hide-sm">Local name</th><th>Type</th></tr></thead>
+          <tbody>${bodyRows}</tbody>
+        </table>
+      </section>`;
+  }
+
+  // ── Tooltip ───────────────────────────────────────────────────────
+  const tip = $('tooltip');
+  function showTip(e, date, hols) {
+    tip.innerHTML =
+      `<div class="tt-date">${dateObj(date).toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' })}</div>` +
+      hols.map(h => `
+        <div class="tt-item">
+          <div class="tt-name">${esc(h.name_en)}</div>
+          <div class="tt-local">${esc(h.name_local)}</div>
+          <div><span class="badge ${h.category}">${h.category}</span></div>
+          <div class="tt-cities">📍 ${esc(h.cities.join(', '))}</div>
+        </div>`).join('');
+    tip.classList.add('visible');
+    moveTip(e);
+  }
+  function moveTip(e) {
+    const x = e.clientX + 14, y = e.clientY + 14;
+    tip.style.left = Math.min(x, innerWidth  - tip.offsetWidth  - 12) + 'px';
+    tip.style.top  = Math.min(y, innerHeight - tip.offsetHeight - 12) + 'px';
+  }
+  function hideTip() { tip.classList.remove('visible'); }
+
+  // ── Bootstrap: load data then render ─────────────────────────────
+  fetch('holidays.json')
+    .then(r => r.json())
+    .then(data => {
+      HOLIDAYS       = data.holidays;
+      COUNTRIES      = data.countries;
+      COUNTRY_LABELS = data.countryLabels;
+      init();
+    })
+    .catch(e => {
+      document.querySelector('.content').innerHTML =
+        `<div class="empty">⚠ Error loading holidays.json: ${e.message}</div>`;
+    });
 </script>
 </body>
 </html>
