@@ -443,6 +443,7 @@
   function init() {
     selectedCities = new Set([...new Set(HOLIDAYS.map(h => h.city))]);
     cityCountry    = Object.fromEntries(HOLIDAYS.map(h => [h.city, COUNTRIES[h.country] || 'XX']));
+    setType(selectedType);
     renderCities();
     render();
   }
