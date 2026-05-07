@@ -450,7 +450,9 @@
   // ── Type chip selector ────────────────────────────────────────────
   function setType(t) {
     selectedType = t;
-    document.querySelectorAll('.type-chip').forEach(b => b.classList.toggle('active', b.classList.contains(`tc-${t}`)));
+    document.querySelectorAll('.type-chip').forEach(b => {
+      b.classList.toggle('active', t === 'all' || b.classList.contains(`tc-${t}`));
+    });
     render();
   }
 
