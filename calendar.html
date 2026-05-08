@@ -264,11 +264,22 @@
     .tt-cities { font-size: 12px; color: #cbd5e1; margin-top: 5px; }
 
     /* ── Responsive ────────────────────────────────────────────────── */
+    /* ── Footer ───────────────────────────────────────────────────── */
+    .page-footer {
+      display: none;
+      text-align: center;
+      padding: 20px 16px 28px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
     @media (max-width: 900px) {
       .hero { position: sticky; padding: 14px 16px; }
       .hero-top { align-items: center; }
       .brand { min-width: 0; }
       .logo { width: 40px; height: 40px; }
+      h1 { font-size: 16px; white-space: nowrap; }
+      .subtitle { display: none; }
       .filter-toggle { padding: 8px 11px; }
       .hero-view-tabs .pill { padding: 7px 9px; font-size: 12px; }
       .panel { margin-top: 14px; }
@@ -278,6 +289,7 @@
       .months-grid { grid-template-columns: 1fr; }
       td, th { font-size: 12px; padding: 9px 8px; }
       .hide-sm { display: none; }
+      .page-footer { display: block; }
     }
     @media (max-width: 560px) {
       .hero-view-tabs .pill span { display: none; }
@@ -300,7 +312,7 @@
       <div class="brand">
         <div class="logo">📅</div>
         <div>
-          <h1>Cooltra Holiday Calendar</h1>
+          <h1>Cooltra/felyx FF Holidays Calendar</h1>
           <p class="subtitle">18 cities · 6 countries · 2026–2027 · operational holiday planning</p>
         </div>
       </div>
@@ -312,8 +324,8 @@
 
       <div class="hero-view-tabs">
         <button class="pill active" data-view="calendar" onclick="setView('calendar')">Calendar</button>
-        <button class="pill"        data-view="bydate"   onclick="setView('bydate')">By date</button>
-        <button class="pill"        data-view="bycity"   onclick="setView('bycity')">By city</button>
+        <button class="pill"        data-view="bydate"   onclick="setView('bydate')">Date</button>
+        <button class="pill"        data-view="bycity"   onclick="setView('bycity')">City</button>
       </div>
 
       <button id="filterToggle" class="filter-toggle" onclick="toggleFilters()" aria-expanded="true">
@@ -376,6 +388,10 @@
   </main>
 
   <div class="tooltip" id="tooltip"></div>
+
+  <footer class="page-footer">
+    18 cities · 6 countries · 2026–2027 · operational holiday planning
+  </footer>
 </div>
 
 <script>
