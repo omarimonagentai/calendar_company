@@ -274,14 +274,17 @@
     }
 
     @media (max-width: 900px) {
-      .hero { position: sticky; padding: 14px 16px; }
-      .hero-top { align-items: center; }
+      .hero { position: sticky; padding: 12px 16px; }
+      .hero-top { flex-direction: column; align-items: stretch; gap: 10px; }
+      .logo { display: none; }
       .brand { min-width: 0; }
-      .logo { width: 40px; height: 40px; }
       h1 { font-size: 16px; white-space: nowrap; }
       .subtitle { display: none; }
-      .filter-toggle { padding: 8px 11px; }
+      .hero-controls { display: flex; gap: 6px; align-items: center; flex-wrap: nowrap; }
+      .hero-year-tabs, .hero-view-tabs { display: flex; gap: 4px; }
+      .hero-year-tabs .pill,
       .hero-view-tabs .pill { padding: 7px 9px; font-size: 12px; }
+      .filter-toggle { padding: 8px 10px; margin-left: auto; }
       .panel { margin-top: 14px; }
       .filters { grid-template-columns: 1fr; }
       .stats  { grid-template-columns: repeat(2, 1fr); padding: 0 16px; }
@@ -317,20 +320,22 @@
         </div>
       </div>
 
-      <div class="hero-year-tabs">
-        <button class="pill active" data-year="2026" onclick="setYear(2026)">2026</button>
-        <button class="pill"        data-year="2027" onclick="setYear(2027)">2027</button>
-      </div>
+      <div class="hero-controls">
+        <div class="hero-year-tabs">
+          <button class="pill active" data-year="2026" onclick="setYear(2026)">2026</button>
+          <button class="pill"        data-year="2027" onclick="setYear(2027)">2027</button>
+        </div>
 
-      <div class="hero-view-tabs">
-        <button class="pill active" data-view="calendar" onclick="setView('calendar')">Calendar</button>
-        <button class="pill"        data-view="bydate"   onclick="setView('bydate')">Date</button>
-        <button class="pill"        data-view="bycity"   onclick="setView('bycity')">City</button>
-      </div>
+        <div class="hero-view-tabs">
+          <button class="pill active" data-view="calendar" onclick="setView('calendar')">Calendar</button>
+          <button class="pill"        data-view="bydate"   onclick="setView('bydate')">Date</button>
+          <button class="pill"        data-view="bycity"   onclick="setView('bycity')">City</button>
+        </div>
 
-      <button id="filterToggle" class="filter-toggle" onclick="toggleFilters()" aria-expanded="true">
-        ▴ Hide filters
-      </button>
+        <button id="filterToggle" class="filter-toggle" onclick="toggleFilters()" aria-expanded="true">
+          ▴ Hide filters
+        </button>
+      </div>
     </div>
 
     <!-- Collapsible filter panel -->
@@ -430,7 +435,11 @@
     const btn = $('filterToggle');
     if (btn) {
       btn.setAttribute('aria-expanded', String(!collapsed));
-      btn.textContent = collapsed ? '▾ Show filters' : '▴ Hide filters';
+      if (window.innerWidth <= 900) {
+        btn.textContent = collapsed ? '▾ Filter' : '▴ Filter';
+      } else {
+        btn.textContent = collapsed ? '▾ Show filters' : '▴ Hide filters';
+      }
     }
   }
   function toggleFilters() {
